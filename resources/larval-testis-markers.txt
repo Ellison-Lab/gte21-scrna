@@ -1,0 +1,14 @@
+>Spermatocyte
+expressed: aly, sa, tbrd-1, tbrd-2, bol, fzo, twe, spir, Ance, dj, ocn, CycB, twin, bb8
+
+>Spermatogonia
+expressed: AGO3, vas, bam, aub, p53, Dek, osa, CycA
+
+>Cyst
+expressed: tj, eya, piwi, bnb, Nrt, Wnt4
+
+>TerminalEpithelial
+expressed: Fas3, nord, Piezo
+
+>Pigment
+expressed: Sox100B, ems

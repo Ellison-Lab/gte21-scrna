@@ -1,0 +1,34 @@
+# alignment options
+DISALLOW_GENE_TYPES: [tRNA, rRNA]
+CELLRANGER_VERSION: 3.1.0
+CELLRANGER_MKREF_MEM: 16000
+CELLRANGER_COUNT_MEM: 128000
+CELLRANGER_COUNT_CPUS: 64
+FASTERQDUMP_MEM: 16000
+
+# scanpy options
+FBGNS: 'ftp://ftp.flybase.org/releases/FB2020_01/precomputed_files/genes/fbgn_annotation_ID_fb_2020_01.tsv.gz'
+LARVAL_TESTIS_MARKERS: 'resources/larval-testis-markers.txt'
+RANDOM_SEED: 2021
+MITO_CUTOFF: 0.05 # 0.05
+MAX_GENES: 5000 # 5000
+GENE_MIN: 250 # 250
+GENE_MIN_COUNT: 3 # 1
+GENE_MIN_CELLS: 3 # 3
+MAX_SCALE: 20 # set to arbitrarily huge number for no capping
+N_NEIGHBORS: 25 # 20
+N_PCS_FOR_NEIGHBORS: 15 # 15
+UMAP_SPREAD: 1 #1
+UMAP_MIN_DIST: 0.1 #0.1
+LEIDEN_RESOLUTION: 0.35 #0.4
+REGRESS_OUT:
+  - S_score
+  - G2M_score
+  - percent_mito
+
+# sample assignments
+SCRNA_GROUPS:
+  larval-w1118-testes:
+    - larval-testes-01
+    - larval-testes-02
+    - larval-testes-03

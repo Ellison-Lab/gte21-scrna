@@ -1,0 +1,34 @@
+from os.path import realpath
+from os.path import split as pathsplit
+from os.path import basename
+import subprocess
+from snakemake.remote.FTP import RemoteProvider as FTPRemoteProvider
+from snakemake.remote.HTTP import RemoteProvider as HTTPRemoteProvider
+import sys
+import random
+import json
+
+FTP = FTPRemoteProvider()
+
+singularity: "docker://continuumio/miniconda3"
+configfile: "config/config.yaml"
+pepfile: "config/pep.yaml"
+
+subworkflow custom_genome:
+    workdir:
+        "../../gte21-custom-genome/"
+    snakefile:
+        "../../gte21-custom-genome/workflow/Snakefile"
+
+# variables
+RANDOM_SEED = config.get("RANDOM_SEED",2020)
+random.seed(RANDOM_SEED)
+
+rule all:
+    input:
+        "results/cellranger/idx",
+        expand("results/scanpy/{g}/celltypes.h5ad",g=config['SCRNA_GROUPS'])
+        #expand("results/cellranger/{s}.done",s=config['SCRNA_GROUPS']['larval-w1118-testes'])
+
+include: "rules/cellranger.smk"
+include: "rules/process-with-scanpy.smk"
