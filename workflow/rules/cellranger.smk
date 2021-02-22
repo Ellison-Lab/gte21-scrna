@@ -95,7 +95,9 @@ rule cellranger_count:
         cpus=config.get("CELLRANGER_COUNT_CPUS",32),
     shell:
         """
-        cd results/cellranger
+        cd results/cellranger \
+        rmdir results/cellranger/counts-{wildcards.sample}/outs \
+        rmdir results/cellranger/counts-{wildcards.sample} \
         ~/cellranger-{params.ver}/cellranger count --id=counts-{wildcards.sample} \
         --sample={wildcards.sample} \
         --fastqs=../fastq-rename-10x/{wildcards.sample} \
