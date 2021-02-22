@@ -72,7 +72,7 @@ rule ingest:
         #h5_1 = "../../data/larval-testes-01.10x.h5",
         #h5_2 = "../../data/larval-testes-02.10x.h5",
         #h5_3 = "../../data/larval-testes-03.10x.h5",
-        fbgn_f = FTP.remote(config.get("FBGNS",None)),
+        fbgn_f = determine_resource(config.get("FBGNS",None)),
         mito_f = rules.get_cc_mito_genes.output.mito,
         cc_f = rules.get_cc_mito_genes.output.cc,
     resources:

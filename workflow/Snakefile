@@ -8,7 +8,20 @@ import sys
 import random
 import json
 
+# Remotes
+HTTP = HTTPRemoteProvider()
 FTP = FTPRemoteProvider()
+
+# DETERMINE REMOTE OR LOCAL RESOURCE
+def determine_resource(path):
+    if "ftp://" in path:
+         return FTP.remote(path, immediate_close = True)
+    elif "http://" in path:
+         return HTTP.remote(path)
+    elif "https://" in path:
+         return HTTP.remote(path)
+    else:
+        return path
 
 singularity: "docker://continuumio/miniconda3"
 configfile: "config/config.yaml"
