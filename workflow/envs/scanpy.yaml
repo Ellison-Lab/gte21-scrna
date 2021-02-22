@@ -3,6 +3,7 @@ channels:
 - bioconda
 - defaults
 dependencies:
+- scikit-learn
 - pandas=1.0.3
 - pyarrow=0.16.0
 - scanpy=1.6.0
