@@ -73,8 +73,8 @@ rule cellranger_mkref:
         """
         cd results/cellranger
         ~/cellranger-3.1.0/cellranger mkref --genome=idx \
-            --fasta=../../{input.fa} \
-	    --genes=../../{input.gtf} \
+            --fasta={input.fa} \
+	    --genes={input.gtf} \
 	    --memgb={params.mem}
         """
 
