@@ -14,11 +14,15 @@ singularity: "docker://continuumio/miniconda3"
 configfile: "config/config.yaml"
 pepfile: "config/pep.yaml"
 
+MAIN_CONFIG = config.get("MAIN_CONFIG",'config/config.yaml')
+
 subworkflow custom_genome:
     workdir:
         "../../gte21-custom-genome/"
     snakefile:
         "../../gte21-custom-genome/workflow/Snakefile"
+    configfile:
+        MAIN_CONFIG
 
 # variables
 RANDOM_SEED = config.get("RANDOM_SEED",2020)
