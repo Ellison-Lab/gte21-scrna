@@ -27,7 +27,7 @@ random.seed(RANDOM_SEED)
 rule all:
     input:
         "results/cellranger/idx",
-        expand("results/scanpy/{g}/celltypes.h5ad",g=config['SCRNA_GROUPS'])
+        expand("results/scanpy/{g}/celltypes.h5ad",g=config['SCRNA_GROUPS']),
         expand("results/scanpy/{g}/anno/var.csv",g=config['SCRNA_GROUPS']),
         expand("results/scanpy/{g}/clusters-to-celltypes.csv",g=config['SCRNA_GROUPS']),
         expand("results/scanpy/{g}/anno/obsm.csv",g=config['SCRNA_GROUPS']),
