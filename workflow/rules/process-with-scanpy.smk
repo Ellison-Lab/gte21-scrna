@@ -120,6 +120,21 @@ rule export_raw_loom:
     script:
         "../scripts/export_loom.py"
 
+rule get_anno:
+    input:
+        'results/scanpy/{group}/anno/'
+    output:
+        var='results/scanpy/{group}/var.csv',
+        obs='results/scanpy/{group}/obs.csv',
+        obsm='results/scanpy/{group}/obsm.csv',
+    params:
+        dir = lambda wc: 'results/scanpy/{g}/anno/'.format(g=wc.group)
+    shell:
+        """
+        cp {input}/var.csv {output.var} &&
+        cp {input}/obs.csv {output.obs} &&
+        cp {input}/obsm.csv {output.obsm}
+        """
 
 rule larval_testis_community_to_celltypes:
     """
