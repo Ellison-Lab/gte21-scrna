@@ -88,7 +88,7 @@ rule cellranger_count:
         config.get("CELLRANGER_COUNT_CPUS",32)
     params:
         ver = config.get("CELLRANGER_VERSION",'3.1.0'),
-        mem = int(config.get("CELLRANGER_COUNT_MEM",128000)/1000.0)
+        mem = int((config.get("CELLRANGER_COUNT_MEM",128000)-5000)/1000.0)
     resources:
         time="18:00:00",
         mem=config.get("CELLRANGER_COUNT_MEM",128000),
