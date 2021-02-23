@@ -96,8 +96,7 @@ rule cellranger_count:
     shell:
         """
         cd results/cellranger \
-        rmdir counts-{wildcards.sample}/outs \
-        rmdir counts-{wildcards.sample} \
+        rm -rf counts-{wildcards.sample} \
         ~/cellranger-{params.ver}/cellranger count --id=counts-{wildcards.sample} \
         --sample={wildcards.sample} \
         --fastqs=../fastq-rename-10x/{wildcards.sample} \
