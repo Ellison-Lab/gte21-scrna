@@ -31,9 +31,9 @@ from funcs import *
 # max_value = 100
 # gene_cut = 5000
 
-h5_1 = snakemake.input[0]
-h5_2 = snakemake.input[1]
-h5_3 = snakemake.input[2]
+h5_1 = snakemake.params['h5s'][0]
+h5_2 = snakemake.params['h5s'][1]
+h5_3 = snakemake.params['h5s'][2]
 
 scrub_thresh = snakemake.params['scrub_thresh']
 max_value = snakemake.params['max_value']
