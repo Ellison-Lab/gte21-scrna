@@ -83,8 +83,8 @@ rule cellranger_count:
         idx = rules.cellranger_mkref.output,
         fqs = rules.rename_fqs_10x.output,
     output:
-        #"results/cellranger/counts-{sample}/outs/filtered_feature_bc_matrix.h5"
-        touch('results/cellranger/{sample}.done')
+        "results/cellranger/counts-{sample}/outs/filtered_feature_bc_matrix.h5"
+        #touch('results/cellranger/{sample}.done')
     threads:
         config.get("CELLRANGER_COUNT_CPUS",32)
     params:
@@ -97,6 +97,7 @@ rule cellranger_count:
     shell:
         """
         cd results/cellranger \
+        rm -rf results/cellranger/counts-{wildcards.sample}/outs \
         ~/cellranger-{params.ver}/cellranger count --id=counts-{wildcards.sample} \
         --sample={wildcards.sample} \
         --fastqs=../fastq-rename-10x/{wildcards.sample} \

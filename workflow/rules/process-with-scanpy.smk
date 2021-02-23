@@ -68,7 +68,7 @@ rule ingest:
     Integration approach with ingest,
     """
     input:
-        lambda wc: expand('results/cellranger/{s}.done',s=config.get("SCRNA_GROUPS").get(wc.group)),
+        lambda wc: expand("results/cellranger/counts-{s}/outs/filtered_feature_bc_matrix.h5",s=config.get("SCRNA_GROUPS").get(wc.group)),
         #h5_1 = "../../data/larval-testes-01.10x.h5",
         #h5_2 = "../../data/larval-testes-02.10x.h5",
         #h5_3 = "../../data/larval-testes-03.10x.h5",
@@ -85,7 +85,6 @@ rule ingest:
         h5ad = temp("results/scanpy/{group}/tmp.h5ad"),
         clusters = 'results/scanpy/{group}/figs/communities.pdf'
     params:
-        h5s = lambda wc: expand("results/cellranger/counts-{s}/outs/filtered_feature_bc_matrix.h5",s=config.get("SCRNA_GROUPS").get(wc.group)),
         scrub_thresh = lambda wc: [float(pep.get_sample(x).doublet_threshold[0]) for x in config.get("SCRNA_GROUPS").get(wc.group)],
         vars = config.get("REGRESS_OUT",None),
         max_value = config.get("MAX_SCALE"),
