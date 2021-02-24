@@ -15,7 +15,7 @@ FTP = FTPRemoteProvider()
 # DETERMINE REMOTE OR LOCAL RESOURCE
 def determine_resource(path):
     if "ftp://" in path:
-         return FTP.remote(path, immediate_close = True)
+         return FTP.remote(path, keep_local=True, immediate_close = True)
     elif "http://" in path:
          return HTTP.remote(path)
     elif "https://" in path:
