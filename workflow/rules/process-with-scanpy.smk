@@ -145,6 +145,19 @@ rule get_anno:
         cp {input}/obsm.csv {output.obsm}
         """
 
+rule get_raw_umis:
+    input:
+        h5 = lambda wc: expand("results/cellranger/counts-{s}/outs/filtered_feature_bc_matrix.h5",s=config.get("SCRNA_GROUPS").get(wc.group)),
+        obs = 'results/scanpy/{group}/obs.csv',
+        var = 'results/scanpy/{group}/var.csv',
+    output:
+        "results/scanpy/{group}/umis.csv.gz"
+    conda:
+        "../envs/seurat.yaml"
+    script:
+        "../scripts/get_raw_umis.R"
+
+
 rule larval_testis_community_to_celltypes:
     """
     Assign likely cell types from the larval clusters with 'garnett' R
