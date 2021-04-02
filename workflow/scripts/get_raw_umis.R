@@ -30,15 +30,13 @@ filtered_cells <- obs %>%
 dat <- h5s_fl %>% set_names(.,paste0(grp,str_extract(.,"(?<=testes-)\\d+(?=\\/)"))) %>%
   map(Seurat::Read10X_h5) %>%
   imap(~{
-    .x[which(rownames(.x) %in% var$X1),which(colnames(.x) %in% filtered_cells[[.y]])]
-    #.x[which(!str_detect(rownames(.x),"FBgn")),which(colnames(.x) %in% filtered_cells[[.y]])]
+    #.x[which(rownames(.x) %in% var$X1),which(colnames(.x) %in% filtered_cells[[.y]])]
+    .x[which(!str_detect(rownames(.x),"FBgn")),which(colnames(.x) %in% filtered_cells[[.y]])]
   }) %>%
   map(Matrix::as.matrix) %>%
   map(as_tibble, rownames = "gene") %>%
   map_df(~gather(.,cell,UMIs,-gene), .id = "batch") %>%
   mutate(cell = paste(cell,batch, sep="-"))
-
-stopifnot(all(obs$X1 %in% dat$cell))
 
 write_csv(dat,snakemake@output[["csv"]])
 
