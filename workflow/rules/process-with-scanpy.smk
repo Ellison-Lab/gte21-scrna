@@ -151,7 +151,7 @@ rule get_raw_umis:
         obs = 'results/scanpy/{group}/obs.csv',
         var = 'results/scanpy/{group}/var.csv',
     output:
-        "results/scanpy/{group}/umis.csv.gz"
+        csv="results/scanpy/{group}/umis.csv.gz"
     resources:
         time=20,
         mem=20000,
