@@ -152,6 +152,10 @@ rule get_raw_umis:
         var = 'results/scanpy/{group}/var.csv',
     output:
         "results/scanpy/{group}/umis.csv.gz"
+    resources:
+        time=20,
+        mem=20000,
+        cpus=2
     conda:
         "../envs/seurat.yaml"
     script:
