@@ -77,10 +77,7 @@ rule ingest:
     Integration approach with ingest,
     """
     input:
-        lambda wc: expand("results/cellranger/counts-{s}/outs/filtered_feature_bc_matrix.h5",s=config.get("SCRNA_GROUPS").get(wc.group)),
-        #h5_1 = "../../data/larval-testes-01.10x.h5",
-        #h5_2 = "../../data/larval-testes-02.10x.h5",
-        #h5_3 = "../../data/larval-testes-03.10x.h5",
+        h5s = lambda wc: expand("results/cellranger/counts-{s}/outs/filtered_feature_bc_matrix.h5",s=config.get("SCRNA_GROUPS").get(wc.group)),
         fbgn_f = rules.get_fbgns.output, #determine_resource(config.get("FBGNS",None)),
         mito_f = rules.get_cc_mito_genes.output.mito,
         cc_f = rules.get_cc_mito_genes.output.cc,
