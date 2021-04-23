@@ -30,7 +30,9 @@ from funcs import *
 # max_value = 100
 # gene_cut = 5000
 
-h5s = list(itertools.chain(*snakemake.input['h5s']))
+h5s = list(itertools.chain(snakemake.input['h5s']))
+
+print(h5s)
 
 scrub_thresh = snakemake.params['scrub_thresh']
 max_value = snakemake.params['max_value']
@@ -50,7 +52,9 @@ umap_spread = snakemake.params['umap_spread']
 cc_f = snakemake.input['cc_f']
 vars_to_regress = snakemake.params['vars']
 
-fbgn_f = snakemake.input["fbgn_f"]
+fbgn_f = snakemake.input["fbgn_f"][0]
+
+print(fbgn_f)
 
 ads = [scanpy.read_10x_h5(h5) for h5 in h5s]
 

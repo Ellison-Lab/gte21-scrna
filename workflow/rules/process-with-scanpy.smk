@@ -35,6 +35,9 @@ rule export_expression:
     output:
         raw = "results/scanpy/{group}/lognorm-expression.csv.gz",
         exp = "results/scanpy/{group}/scaled-expression.csv.gz"
+    resources:
+        time=60,
+        mem=12000,
     conda:
         "../envs/scanpy.yaml"
     script:
@@ -179,8 +182,8 @@ rule larval_testis_community_to_celltypes:
         #g_table = "results/scanpy/{group}/figs/community-to-celltype-table.pdf",
         #g_garnett_results = "results/scanpy/{group}/figs/community-to-celltype-barchart.pdf",
         #g_marker_check = "results/scanpy/{group}/figs/celltype-marker-check.pdf",
-    #conda:
-    #    "../envs/monocle3.yaml"
+    conda:
+        "../envs/garnett.yaml"
     shell:
         "Rscript workflow/scripts/clusters-to-celltypes.R {input.larval} {input.markers} {input.csvs} {output.ofl} {threads}"
 
@@ -195,6 +198,6 @@ rule add_larval_celltype:
         ad = "results/scanpy/{group}/celltypes.h5ad",
         clusters = 'results/scanpy/{group}/figs/clusters.pdf'
     conda:
-        "../envs/scanpy.yaml"
+        "../envs/scanpy-b.yaml"
     script:
         "../scripts/add-larval-celltypes.py"
