@@ -4,6 +4,8 @@ rule get_sra_10x:
         dir = "results/get-sra-10x/"
     output:
         temp(directory("results/get-sra-10x/{sample}"))
+    resources:
+        time=120,
     shell:
         """
         wget -P {params.dir}/{wildcards.sample} {params.url}
