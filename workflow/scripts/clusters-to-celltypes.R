@@ -1,13 +1,13 @@
-.libPaths(
-	c("/cache/home/mal456/miniconda3/lib/R/library",
-	"/cache/home/mal456/R/4.0.2/lib64/R/library")
-)
+#.libPaths(
+#	c("/cache/home/mal456/miniconda3/lib/R/library",
+#	"/cache/home/mal456/R/4.0.2/lib64/R/library")
+#)
 
 library(LoomExperiment)
 library(monocle3)
 library(tidyverse)
 library(org.Dm.eg.db)
-library(garnett)
+if (!require('garnett')) devtools::install_github('cole-trapnell-lab/garnett',ref="bfca215"); library('garnett')
 
 args = commandArgs(trailingOnly=TRUE)
 fl = args[1]
