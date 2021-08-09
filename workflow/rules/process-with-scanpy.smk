@@ -201,3 +201,13 @@ rule add_larval_celltype:
         "../envs/scanpy-b.yaml"
     script:
         "../scripts/add-larval-celltypes.py"
+
+rule get_diffs:
+    input:
+        ad = rules.add_larval_celltype.output.ad
+    output:
+        ad = "results/scanpy/{group}/diffs.csv.gz"
+    conda:
+        "../envs/scanpy.yaml"
+    script:
+        "../scripts/diffs.py"

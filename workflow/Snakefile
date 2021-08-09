@@ -48,7 +48,8 @@ rule all:
         expand("results/scanpy/{g}/{f}.csv",g=config['SCRNA_GROUPS'],f=['var','obs','obsm']),
         expand("results/scanpy/{g}/clusters-to-celltypes.csv",g=config['SCRNA_GROUPS']),
         expand("results/scanpy/{g}/lognorm-expression.csv.gz",g=config['SCRNA_GROUPS']),
-        expand("results/scanpy/{g}/scaled-expression.csv.gz",g=config['SCRNA_GROUPS'])
+        expand("results/scanpy/{g}/scaled-expression.csv.gz",g=config['SCRNA_GROUPS']),
+        expand("results/scanpy/{g}/diffs.csv.gz",g=config['SCRNA_GROUPS'])
         #expand("results/cellranger/{s}.done",s=config['SCRNA_GROUPS']['larval-w1118-testes'])
 
 include: "rules/cellranger.smk"
